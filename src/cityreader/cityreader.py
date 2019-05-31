@@ -86,12 +86,12 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # Go through each city and check to see if it falls within
     # the specified coordinates.
 
-    if lat2 < lat1:
+    if float(lat2) < float(lat1):
         temp = lat2
         lat2 = lat1
         lat1 = temp
 
-    if lon2 < lon1:
+    if float(lon2) < float(lon1):
         temp = lon2
         lon2 = lon1
         lon1 = temp
