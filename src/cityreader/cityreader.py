@@ -108,7 +108,7 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
         # print(lon1)
         # print(lon2)
         if float(lat1) < float(c.lat) < float(lat2) and float(lon1) < float(c.lon) < float(lon2):
-            within.append(c.name)
+            within.append(f'{c.name.split(",")[0]}: ({c.lat}, {c.lon})')
 
     return within
 
@@ -123,5 +123,6 @@ lon1 = input1.split(',')[1]
 lat2 = input2.split(',')[0]
 lon2 = input2.split(',')[1]
 
-print(cityreader_stretch(lat1, lon1, lat2, lon2))
+for city in cityreader_stretch(lat1, lon1, lat2, lon2):
+    print(city)
 # print(cityreader_stretch(32, -100, 45, -120))
