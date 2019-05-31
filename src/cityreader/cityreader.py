@@ -32,6 +32,7 @@ def cityreader(cities=[]):
     # `cities` list
     with open('cities.csv', newline='') as csvfile:
         cityreader = csv.reader(csvfile, delimiter=',')
+        next(csvfile)
         for row in cityreader:
             cities.append(City(f'{row[0]}, {row[1]}', row[3], row[4]))
     return cities
@@ -85,4 +86,38 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # Go through each city and check to see if it falls within
     # the specified coordinates.
 
+    if lat2 < lat1:
+        temp = lat2
+        lat2 = lat1
+        lat1 = temp
+
+    if lon2 < lon1:
+        temp = lon2
+        lon2 = lon1
+        lon1 = temp
+
+    # for c in cities:
+    #     # if float(lat1) <= float(c.lat) and float(lat2) >= float(c.lat) and float(lon1) <= float(c.lon) and float(lon2) >= float(c.lon):
+    #     if float(lat1) <= float(c.lat) and float(lat2) >= float(c.lat) and float(lon1) <= float(c.lon) and float(lon2) >= float(c.lon):
+    #         within.append(c.name)
+    # return within
+
+    for c in cityreader(cities):
+        if float(lat1) < float(c.lat) < float(lat2) and float(lon1) < float(c.lon) < float(lat2):
+            within.append(c.name)
+
     return within
+
+
+# Enter lat1,lon1: 45,-100
+# Enter lat2,lon2: 32,-120
+input1 = input('Enter lat1,lon1: ')
+input2 = input('Enter lat2,lon2: ')
+
+lat1 = input1.split(',')[0]
+lon1 = input1.split(',')[1]
+lat2 = input2.split(',')[0]
+lon2 = input2.split(',')[1]
+
+print(cityreader_stretch(lat1, lon1, lat2, lon2))
+print(cityreader_stretch(32, -100, 45, -120))
